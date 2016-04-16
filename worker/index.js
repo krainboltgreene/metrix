@@ -1,5 +1,7 @@
-import memory from "./memory"
+import {atEvery} from "oft"
 
-export {
-  memory
-}
+import memory from "./memory"
+import scrub from "./scrub"
+
+atEvery("1 Second", memory)
+atEvery("30 Second", scrub)
