@@ -11,7 +11,9 @@
     "build:client:static": "gulp build",
     "lint": "eslint './client/' './component/' './layout/' './remote/'",
     "test": "mocha --compilers js:babel-register './**/test.js'",
-    "start": "http-server -c-1 './tmp/'",
+    "start": "npm-run-all --parallel server:postgres server:http",
+    "server:postgres": "postgrest postgres://metrix:@localhost:5432/metrix --port 8081 --anonymous metrix --schema public",
+    "server:http": "http-server -c-1 './tmp/'",
     "data:migrate": "knex migrate:latest",
     "data:change": "knex migrate:make",
     "data:seed": "knex seed:run"
