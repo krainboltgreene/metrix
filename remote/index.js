@@ -1,5 +1,5 @@
-import rethinkdbdash from "./rethinkdbdash"
+import knex from "./knex"
 
 export {
-  rethinkdbdash
+  knex
 }

@@ -1,13 +1,15 @@
 import {freemem} from "os"
 import {totalmem} from "os"
-import {rethinkdbdash} from "../../remote"
+import {knex} from "~/remote"
 
-export default () => {
-  return rethinkdbdash
-    .table("memory")
-    .insert({
+knex("memories")
+  .insert({
+    data: {
+      used: totalmem() - freemem(),
       free: freemem(),
       total: totalmem()
-    })
-    .run()
-}
+    }
+  })
+  .then(console.log)
+  .catch(console.log)
+  .then(process.exit)
