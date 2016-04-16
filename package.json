@@ -88,6 +88,7 @@
     "prettysize": "0.0.3",
     "ramda": "0.21.0",
     "require-environment-variables": "1.1.1",
+    "rx": "4.1.0",
     "s-ago": "1.0.6",
     "snabbdom": "0.4.2",
     "snabbdom-helpers": "3.0.0"
