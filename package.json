@@ -41,6 +41,8 @@
     "mocha": "2.4.5"
   },
   "dependencies": {
+    "@cycle/core": "^6.0.3",
+    "@cycle/http": "^8.2.2",
     "babel": "6.5.2",
     "babel-cli": "6.7.5",
     "babel-plugin-transform-es2015-arrow-functions": "6.5.2",
