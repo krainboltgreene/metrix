@@ -1,10 +1,10 @@
-import {section} from "snabbdom-helpers"
+import {main} from "snabbdom-helpers"
 
 import example from "./example"
 
 export default (state) => {
-  return section({
-    selector: ".dashboards",
+  return main({
+    selector: "#application.dashboards",
     content: [
       example(state)
     ]

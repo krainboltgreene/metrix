@@ -3,8 +3,8 @@ import number from "../number"
 
 const DEFAULT = 0
 
-export default ({memory: {free, updatedAt}}) => number({
+export default ({memory: {data: {free}, created_at}}) => number({
   title: "Free Memory",
-  value: prettysize(free || DEFAULT),
-  updatedAt
+  value: prettysize(free || DEFAULT, true),
+  updatedAt: new Date(created_at)
 })
