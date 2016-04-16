@@ -12,9 +12,9 @@
     "lint": "eslint './client/' './component/' './layout/' './remote/'",
     "test": "mocha --compilers js:babel-register './**/test.js'",
     "start": "http-server -c-1 './tmp/'",
-    "data:drop": "scripty",
-    "data:create": "scripty",
-    "data:seed": "scripty"
+    "data:migrate": "knex migrate:latest",
+    "data:change": "knex migrate:make",
+    "data:seed": "knex seed:run"
   },
   "author": "Kurtis Rainbolt-Greene <kurtis@laurelandwolf.com>",
   "license": "MIT",
@@ -79,13 +79,12 @@
     "http-server": "^0.9.0",
     "normalize.css": "^4.1.1",
     "npm-run-all": "^1.7.0",
+    "knex": "0.10.0",
+    "pg": "4.5.3",
     "prettysize": "0.0.3",
     "ramda": "0.21.0",
-    "rethinkdb": "^2.3.0",
-    "rethinkdbdash": "^2.2.20",
     "s-ago": "1.0.6",
     "snabbdom": "0.4.2",
     "snabbdom-helpers": "3.0.0",
-    "thinky": "^2.2.7"
   }
 }
