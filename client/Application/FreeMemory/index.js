@@ -7,5 +7,6 @@ export default function FreeMemory () {
     storeType="memory"
     storeKey="free"
     format="prettySize"
+    size="large"
   />
 }

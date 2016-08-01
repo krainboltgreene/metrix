@@ -7,5 +7,6 @@ export default function TotalMemory () {
     storeType="memory"
     storeKey="total"
     format="prettySize"
+    size="large"
   />
 }

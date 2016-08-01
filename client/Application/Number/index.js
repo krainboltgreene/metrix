@@ -29,6 +29,7 @@ export default connectWithStatistics(class Number extends Component {
     storeType: PropTypes.string.isRequired,
     storeKey: PropTypes.string.isRequired,
     format: PropTypes.string.isRequired,
+    size: PropTypes.string,
     statistics: PropTypes.object
   }
 
@@ -37,6 +38,7 @@ export default connectWithStatistics(class Number extends Component {
     const {storeType} = this.props
     const {storeKey} = this.props
     const {format} = this.props
+    const {size} = this.props
     const {statistics} = this.props
 
     const value = path([storeType, storeKey], statistics)
@@ -50,7 +52,6 @@ export default connectWithStatistics(class Number extends Component {
 
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
-      {maybeRender([value, formatter], () => <BoxValue>{formatter(value)}</BoxValue>)}
       <BoxTime timestamp={createdAt} />
     </BoxBody>
   }

@@ -7,5 +7,6 @@ export default function UsedMemory () {
     storeType="memory"
     storeKey="usedPercent"
     format="percent"
+    size="large"
   />
 }
