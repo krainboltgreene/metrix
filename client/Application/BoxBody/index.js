@@ -18,10 +18,12 @@ export default function BoxBody ({children}) {
       color: "#fff",
       position: "relative",
       display: "flex",
+      flex: 1,
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",
-      minHeight: "253px"
+      minHeight: "253px",
+      minWidth: "300px"
     }}
   >
     {children}
