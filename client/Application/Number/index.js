@@ -15,14 +15,6 @@ const connectWithStatistics = connect(
   merge
 )
 
-const maybeRender = (properties, components) => {
-  if (none(isNil, properties)) {
-    return components()
-  }
-
-  return <Loading />
-}
-
 export default connectWithStatistics(class Number extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -31,6 +23,14 @@ export default connectWithStatistics(class Number extends Component {
     format: PropTypes.string.isRequired,
     size: PropTypes.string,
     statistics: PropTypes.object
+  }
+
+  maybeRender (properties, components) {
+    if (none(isNil, properties)) {
+      return components()
+    }
+
+    return <Loading />
   }
 
   render () {
@@ -52,6 +52,7 @@ export default connectWithStatistics(class Number extends Component {
 
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
+      {this.maybeRender([value, formatter], () => <BoxValue size={size}>{formatter(value)}</BoxValue>)}
       <BoxTime timestamp={createdAt} />
     </BoxBody>
   }
