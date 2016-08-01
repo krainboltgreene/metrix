@@ -7,6 +7,7 @@ const colors = [
   "#3498db",
   "#9b59b6"
 ]
+
 export default function BoxBody ({children}) {
   return <section
     style={{
