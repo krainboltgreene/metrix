@@ -1,5 +1,12 @@
 import React, {PropTypes} from "react"
 
+const colors = [
+  "#5C6A79",
+  "#1abc9c",
+  "#e67e22",
+  "#3498db",
+  "#9b59b6"
+]
 export default function BoxBody ({children}) {
   return <section
     style={{
@@ -7,7 +14,7 @@ export default function BoxBody ({children}) {
       margin: "5px",
       padding: "25px 12px",
       textAlign: "center",
-      background: "#5C6A79",
+      background: colors[Math.floor(Math.random() * colors.length)],
       color: "#fff",
       position: "relative",
       display: "flex",
