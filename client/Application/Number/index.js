@@ -45,11 +45,6 @@ export default connectWithStatistics(class Number extends Component {
     const createdAt = path([storeType, "created_at"], statistics)
     const formatter = formatting[format]
 
-    console.log({
-      value,
-      f: formatter(value)
-    })
-
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
       {this.maybeRender([value, formatter], () => <BoxValue size={size}>{formatter(value)}</BoxValue>)}
