@@ -1,18 +1,18 @@
 import React, {PropTypes} from "react"
 
-export default function BoxValue ({children, size}) {
-  switch (size) {
-    case "large": {
-      return <p style={{fontSize: "64px"}}>
-        {children}
-      </p>
-    }
-    default: {
-      return <p>
-        {children}
-      </p>
-    }
+const sizeChart = {
+  large: {
+    fontSize: "64px"
   }
+}
+
+export default function BoxValue ({children, size}) {
+  return <p
+    className="animated fadeIn"
+    style={sizeChart[size] || {}}
+  >
+    {children}
+  </p>
 }
 BoxValue.propTypes = {
   children: PropTypes.node.isRequired,
