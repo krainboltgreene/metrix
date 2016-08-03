@@ -16,14 +16,10 @@
     "test:client": "mocha --compilers js:babel-register './client/**/test.js'",
     "test:worker": "mocha --compilers js:babel-register './worker/**/test.js'",
     "test:remote": "mocha --compilers js:babel-register './remote/**/test.js'",
-    "start": "npm-run-all --parallel watch server",
-    "server": "npm-run-all --parallel server:postgres server:http server:workers",
-    "server:postgres": "postgrest postgres://metrix:@localhost:5432/metrix --port 8081 --anonymous metrix --schema public",
-    "server:http": "http-server -c-1 -p 8080 './tmp/' -o",
-    "server:workers": "babel-node './worker/index.js'",
-    "data:migrate": "knex migrate:latest",
-    "data:change": "knex migrate:make",
-    "data:seed": "knex seed:run"
+    "start": "npm-run-all --parallel watch service",
+    "service": "npm-run-all --parallel service:http service:workers",
+    "service:http": "http-server -c-1 -p 8080 './tmp/' -o",
+    "service:workers": "babel-node './worker/index.js'"
   },
   "author": "Kurtis Rainbolt-Greene (@krainboltgreene) <me@kurtisrainboltgreene.name>",
   "license": "MIT",
