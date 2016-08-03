@@ -2,6 +2,7 @@ import React, {PropTypes} from "react"
 
 export default function Layout ({children}) {
   return <section
+    className="animated pulse"
     style={{
       display: "flex",
       flexDirection: "row",
