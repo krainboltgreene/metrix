@@ -307,7 +307,8 @@ module.exports = {
     "react/no-is-mounted": "error",
     "react/no-multi-comp": "error",
     "react/no-render-return-value": "error",
-    "react/no-set-state": "error",
+    // Only useful for pure read only components
+    // "react/no-set-state": "error",
     "react/no-string-refs": "error",
     "react/no-unknown-property": "error",
     "react/prefer-es6-class": "error",
