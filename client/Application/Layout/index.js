@@ -7,7 +7,6 @@ export default function Layout ({children}) {
       display: "flex",
       flexDirection: "row",
       flexWrap: "wrap",
-      alignItems: "center",
       justifyContent: "center",
       margin: "5px"
     }}
