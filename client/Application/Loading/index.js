@@ -3,7 +3,7 @@ import Spinner from "react-spinkit"
 
 export default function Loading () {
   return <Spinner
-    spinnerName="cube-grid"
+    spinnerName="double-bounce"
     noFadeIn
   />
 }
