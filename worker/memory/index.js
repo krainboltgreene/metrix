@@ -11,7 +11,7 @@ export default function memory () {
       type: "memory",
       data: {
         used: total - free,
-        usedPercent: ((total - free) / total).toFixed(2),
+        usedPercent: ((total - free) / total).toFixed(1),
         free,
         freePercent: free / total,
         total
