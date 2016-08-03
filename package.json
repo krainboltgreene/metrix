@@ -109,8 +109,11 @@
     "react-dom": "^15",
     "react-redux": "^4",
     "react-spinkit": "^1",
+    "redis": "^2",
+    "redis-commands": "^1",
     "redux": "^3",
     "require-environment-variables": "^1",
-    "s-ago": "^1"
+    "s-ago": "^1",
+    "then-redis": "^2"
   }
 }
