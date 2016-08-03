@@ -3,6 +3,7 @@ const gulpConcat = require("gulp-concat")
 
 const STYLES = [
   "./node_modules/normalize.css/normalize.css",
+  "./node_modules/animate.css/animate.css",
   "./client/index.css"
 ]
 const HTMLS = [
