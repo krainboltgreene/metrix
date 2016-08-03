@@ -1,4 +1,4 @@
-import React, {PropTypes} from "react"
+import React, {PropTypes, Component} from "react"
 
 const colors = [
   "#e74c3c",
@@ -12,28 +12,35 @@ const colors = [
   "#9b59b6"
 ]
 
-export default function BoxBody ({children}) {
-  return <section
-    style={{
-      boxShadow: "0 1px 10px rgba(#000, 0.4)",
-      margin: "5px",
-      padding: "25px 12px",
-      textAlign: "center",
-      background: colors[Math.floor(Math.random() * colors.length)],
-      color: "#fff",
-      position: "relative",
-      display: "flex",
-      flex: 1,
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "space-between",
-      minHeight: "253px",
-      minWidth: "300px"
-    }}
-  >
-    {children}
-  </section>
-}
-BoxBody.propTypes = {
-  children: PropTypes.node.isRequired
+export default class BoxBody extends Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  }
+
+  componentWillMount () {
+    this.setState({color: colors[Math.floor(Math.random() * colors.length)]})
+  }
+
+  render () {
+    return <section
+      style={{
+        boxShadow: "0 1px 10px rgba(#000, 0.5)",
+        margin: "5px",
+        padding: "25px 12px",
+        textAlign: "center",
+        background: this.state.color,
+        color: "#fff",
+        position: "relative",
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        minHeight: "253px",
+        minWidth: "300px"
+      }}
+    >
+      {this.props.children}
+    </section>
+  }
 }
