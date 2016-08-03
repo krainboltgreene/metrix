@@ -1,10 +1,14 @@
 import React, {PropTypes} from "react"
 
 const colors = [
-  "#5C6A79",
+  "#e74c3c",
   "#1abc9c",
   "#e67e22",
+  "#8e44ad",
   "#3498db",
+  "#d35400",
+  "#27ae60",
+  "#f39c12",
   "#9b59b6"
 ]
 
