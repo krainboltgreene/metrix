@@ -1,5 +1,4 @@
 import memory from "./memory"
-import designers from "./designers"
 import scrub from "./scrub"
 
 const SECOND = 500
