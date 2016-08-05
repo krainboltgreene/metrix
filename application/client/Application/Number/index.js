@@ -3,26 +3,29 @@ import {connect} from "react-redux"
 import {path} from "ramda"
 import {merge} from "ramda"
 import {isNil} from "ramda"
+import {equals} from "ramda"
 import {none} from "ramda"
-import * as formatting from "~/client/formatting"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
 import BoxValue from "../BoxValue"
 import BoxTime from "../BoxTime"
 import Loading from "../Loading"
 
-const connectWithStatistics = connect(
+const connectWithStreams = connect(
   merge
 )
 
-export default connectWithStatistics(class Number extends Component {
+export default connectWithStreams(class Number extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     storeType: PropTypes.string.isRequired,
-    storeKey: PropTypes.string.isRequired,
-    format: PropTypes.string.isRequired,
+    format: PropTypes.func.isRequired,
     size: PropTypes.string,
-    statistics: PropTypes.object
+    streams: PropTypes.instanceOf(Object)
+  }
+
+  shouldComponentUpdate (props) {
+    return !equals(this.props, props)
   }
 
   maybeRender (properties, components) {
@@ -36,19 +39,15 @@ export default connectWithStatistics(class Number extends Component {
   render () {
     const {title} = this.props
     const {storeType} = this.props
-    const {storeKey} = this.props
     const {format} = this.props
     const {size} = this.props
-    const {statistics} = this.props
-
-    const value = path([storeType, storeKey], statistics)
-    const createdAt = path([storeType, "created_at"], statistics)
-    const formatter = formatting[format]
+    const {streams} = this.props
+    const [timestamp, value] = path([storeType, "latest"], streams) || []
 
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
-      {this.maybeRender([value, formatter], () => <BoxValue size={size}>{formatter(value)}</BoxValue>)}
-      <BoxTime timestamp={createdAt} />
+      {this.maybeRender([value, format], () => <BoxValue size={size}>{format(value)}</BoxValue>)}
+      <BoxTime timestamp={new Date(timestamp)} />
     </BoxBody>
   }
 })
