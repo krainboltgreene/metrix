@@ -4,10 +4,10 @@ const gulpConcat = require("gulp-concat")
 const STYLES = [
   "./node_modules/normalize.css/normalize.css",
   "./node_modules/animate.css/animate.css",
-  "./client/index.css"
+  "./application/client/index.css"
 ]
 const HTMLS = [
-  "./client/index.html"
+  "./application/client/index.html"
 ]
 const STYLE = "index.css"
 const DESINATION = "./tmp/"

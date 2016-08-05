@@ -27,7 +27,6 @@
     "closure-elimination",
     "ramda",
     "import-asserts",
-    "implicit-return",
     "relative-import"
   ]
 }
