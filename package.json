@@ -97,7 +97,7 @@
     "ago": "^1",
     "animate.css": "^3",
     "dotenv": "^2",
-    "http-server": "0.9.0",
+    "express": "^4",
     "human-format": "0.6.0",
     "knex": "0.11.9",
     "normalize.css": "^4",
