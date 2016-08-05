@@ -332,7 +332,8 @@ module.exports = {
     "react/jsx-max-props-per-line": "error",
     "react/jsx-no-bind": "error",
     "react/jsx-no-duplicate-props": "error",
-    "react/jsx-no-literals": "error",
+    // What the actual fuck
+    // "react/jsx-no-literals": "error",
     "react/jsx-no-target-blank": "error",
     "react/jsx-no-undef": "error",
     "react/jsx-pascal-case": "error",
