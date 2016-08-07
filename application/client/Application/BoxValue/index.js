@@ -8,7 +8,6 @@ const sizeChart = {
 
 export default function BoxValue ({children, size}) {
   return <p
-    className="animated fadeIn"
     style={sizeChart[size] || {}}
   >
     {children}
