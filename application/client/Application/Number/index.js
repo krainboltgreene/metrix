@@ -36,12 +36,12 @@ export default connectLatest(class Number extends Component {
     return !equals([this.props.timestamp, this.props.value], [props.timestamp, props.value])
   }
 
-  maybeRender (properties, components) {
+  maybeRender (properties, alternative, components) {
     if (none(isNil, properties)) {
       return components()
     }
 
-    return <Loading />
+    return alternative
   }
 
   render () {
@@ -54,7 +54,7 @@ export default connectLatest(class Number extends Component {
 
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
-      {this.maybeRender([value, format], () => <BoxValue size={size}>{format(value)}</BoxValue>)}
+      {this.maybeRender([value, format], <Loading />, () => <BoxValue size={size}>{format(value)}</BoxValue>)}
       <BoxTime timestamp={new Date(timestamp)} />
     </BoxBody>
   }
