@@ -3,11 +3,11 @@ import {Sparklines} from "react-sparklines"
 import {SparklinesLine} from "react-sparklines"
 import {connect} from "react-redux"
 import {pathOr} from "ramda"
+import {path} from "ramda"
 import {mergeAll} from "ramda"
 import {isNil} from "ramda"
 import {equals} from "ramda"
 import {none} from "ramda"
-import {zipObj} from "ramda"
 import {objOf} from "ramda"
 import {map} from "ramda"
 import BoxBody from "../BoxBody"
@@ -21,8 +21,8 @@ const connectToTimeseries = connect(
     return mergeAll(
       [
         props,
-        zipObj(["timestamp", "value"], pathOr([], ["streams", props.storeType, "latest"], state)),
-        objOf("timeseries", map(parseInt, pathOr([], ["streams", props.storeType, "timeseries"], state)))
+        objOf("value", path(["streams", props.storeType, "latest"], state)),
+        objOf("timeseries", map((value) => parseInt(value, 10), pathOr([], ["streams", props.storeType, "timeseries"], state)))
       ]
     )
   }
@@ -36,12 +36,11 @@ export default connectToTimeseries(class Number extends Component {
     format: PropTypes.func.isRequired,
     size: PropTypes.string,
     timeseries: PropTypes.instanceOf(Array),
-    timestamp: PropTypes.string,
     value: PropTypes.string
   }
 
   shouldComponentUpdate (props) {
-    return !equals([this.props.timestamp, this.props.value], [props.timestamp, props.value])
+    return !equals(this.props.value, props.value)
   }
 
   maybeRender (properties, alternative, components) {
