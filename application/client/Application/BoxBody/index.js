@@ -27,7 +27,6 @@ export default class BoxBody extends Component {
       style={{
         boxShadow: "0 1px 10px rgba(#000, 0.5)",
         margin: "5px",
-        padding: "25px 12px",
         textAlign: "center",
         background: this.state.color,
         color: "#fff",
