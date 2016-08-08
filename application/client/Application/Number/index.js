@@ -10,7 +10,6 @@ import {none} from "ramda"
 import {zipObj} from "ramda"
 import {objOf} from "ramda"
 import {map} from "ramda"
-import {toNumber} from "~/application/library"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
 import BoxSubtitle from "../BoxSubtitle"
@@ -23,7 +22,7 @@ const connectToTimeseries = connect(
       [
         props,
         zipObj(["timestamp", "value"], pathOr([], ["streams", props.storeType, "latest"], state)),
-        objOf("timeseries", map(toNumber, pathOr([], ["streams", props.storeType, "timeseries"], state)))
+        objOf("timeseries", map(parseInt, pathOr([], ["streams", props.storeType, "timeseries"], state)))
       ]
     )
   }
