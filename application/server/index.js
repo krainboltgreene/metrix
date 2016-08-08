@@ -30,7 +30,7 @@ application.get("/types/:slug", ({params}, response) => {
     .catch((error) => console.error(error))
 })
 
-application.use(express.static(join("tmp")))
+application.use(express.static("tmp"))
 application.use("/", express.static(join("tmp", "index.html")))
 
 application.listen(process.env.API_PORT, () => {
