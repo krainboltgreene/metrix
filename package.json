@@ -88,6 +88,7 @@
     "react": "^15",
     "react-dom": "^15",
     "react-redux": "^4",
+    "react-sparklines": "^1",
     "react-spinkit": "^1",
     "redis": "^2",
     "redis-commands": "^1",
