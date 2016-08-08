@@ -1,14 +1,12 @@
 import {totalmem} from "os"
 import {freemem} from "os"
-import {store} from "~/application/remote"
+import {write} from "~/application/library"
+import {LAZY} from "~/application/library"
 
 export default function usedMemory () {
-  const total = totalmem()
-  const free = freemem()
   const updatedAt = new Date().toJSON()
+  const type = "usedMemory"
+  const key = `${type}/${updatedAt}`
 
-  return store.hset("usedMemory", updatedAt, total - free)
-    .then(() => store.hset("types", "usedMemory", updatedAt))
-    .then(() => console.log("New usedMemory entry"))
-    .catch(console.error)
+  return write({type, key, value: totalmem() - freemem(), expire: LAZY})
 }

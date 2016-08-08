@@ -1,14 +1,4 @@
 import {last} from "ramda"
-import {sortBy} from "ramda"
-import {head} from "ramda"
-import {toPairs} from "ramda"
-import {pipe} from "ramda"
-
-const chronologicallyLatest = pipe(
-  toPairs,
-  sortBy(head),
-  last
-)
 
 export const initialState = {
   streams: {},
@@ -35,7 +25,7 @@ export default function listener (state = initialState, signal) {
         streams: {
           ...state.streams,
           [signal.payload.type]: {
-            latest: chronologicallyLatest(signal.payload.values),
+            latest: last(signal.payload.values),
             timeseries: signal.payload.values
           }
         }

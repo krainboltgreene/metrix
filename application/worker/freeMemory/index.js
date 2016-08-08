@@ -1,11 +1,11 @@
 import {freemem} from "os"
-import {store} from "~/application/remote"
+import {write} from "~/application/library"
+import {LAZY} from "~/application/library"
 
 export default function freeMemory () {
   const updatedAt = new Date().toJSON()
+  const type = "freeMemory"
+  const key = `${type}/${updatedAt}`
 
-  return store.hset("freeMemory", updatedAt, freemem())
-    .then(() => store.hset("types", "freeMemory", updatedAt))
-    .then(() => console.log("New freeMemory entry"))
-    .catch(console.error)
+  return write({type, key, value: freemem(), expire: LAZY})
 }

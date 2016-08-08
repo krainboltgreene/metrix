@@ -2,9 +2,7 @@ import React from "react"
 import {render} from "react-dom"
 import {Provider} from "react-redux"
 import {map} from "ramda"
-import {keys} from "ramda"
 import {tap} from "ramda"
-import {toPairs} from "ramda"
 import Application from "./Application"
 import store from "./store"
 
@@ -25,7 +23,6 @@ const fetchTypes = () => {
 
   return fetch("http://localhost:8081/types")
     .then((response) => response.json())
-    .then(keys)
     .then(tap((types) => store.dispatch({type: "TYPES_RECEIVED", payload: {types}})))
     .then(map(fetchType))
 }
