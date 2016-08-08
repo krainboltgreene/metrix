@@ -32,9 +32,9 @@
     "analysis"
   ],
   "bugs": {
-    "url": "https://github.com/laurelandwolf/metrix/issues"
+    "url": "https://github.com/krainboltgreene/metrix/issues"
   },
-  "homepage": "https://laurelandwolf.github.io/metrix",
+  "homepage": "https://krainboltgreene.github.io/metrix",
   "engines": {
     "node": "^6",
     "npm": "^3"
