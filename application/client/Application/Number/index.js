@@ -10,6 +10,7 @@ import {objOf} from "ramda"
 import {map} from "ramda"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
+import BoxSubtitle from "../BoxSubtitle"
 import BoxValue from "../BoxValue"
 import BoxTime from "../BoxTime"
 import Loading from "../Loading"
@@ -52,6 +53,7 @@ export default connectToTimeseries(class Number extends Component {
 
   render () {
     const {title} = this.props
+    const {subtitle} = this.props
     const {format} = this.props
     const {size} = this.props
     const {timestamp} = this.props
@@ -60,6 +62,7 @@ export default connectToTimeseries(class Number extends Component {
 
     return <BoxBody>
       <BoxHeader>{title}</BoxHeader>
+      {this.maybeRender([subtitle], null, () => <BoxSubtitle>{subtitle}</BoxSubtitle>)}
       {this.maybeRender([value, format], <Loading />, () => <BoxValue size={size}>{format(value)}</BoxValue>)}
       <BoxTime timestamp={new Date(timestamp)} />
     </BoxBody>
