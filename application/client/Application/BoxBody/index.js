@@ -23,6 +23,7 @@ export default class BoxBody extends Component {
 
   render () {
     return <section
+      className="BoxBody"
       style={{
         boxShadow: "0 1px 10px rgba(#000, 0.5)",
         margin: "5px",
