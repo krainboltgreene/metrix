@@ -6,10 +6,10 @@
   "scripts": {
     "postinstall": "npm run build",
     "build": "npm-run-all --parallel build:client build:assets",
-    "build:client": "mkdir -p './tmp/' && browserify --transform babelify --transform cssify --entry './application/client/index.js' --outfile './tmp/index.js'",
+    "build:client": "mkdir -p './tmp/' && browserify --transform babelify --transform cssify --global-transform uglifyify --entry './application/client/index.js' --outfile './tmp/index.js'",
     "build:assets": "gulp build",
     "watch": "npm-run-all --parallel watch:client watch:assets",
-    "watch:client": "watchify --transform babelify --transform cssify --entry './application/client/index.js' --outfile './tmp/index.js'",
+    "watch:client": "watchify --transform babelify --transform cssify --global-transform uglifyify --entry './application/client/index.js' --outfile './tmp/index.js'",
     "watch:assets": "gulp watch",
     "lint": "eslint './application/'",
     "test": "mocha --compilers js:babel-register './application/**/test.js'",
@@ -68,6 +68,7 @@
     "redux-devtools": "^3",
     "redux-devtools-diff-monitor": "^5",
     "redux-devtools-dock-monitor": "^1",
+    "uglifyify": "^3",
     "watchify": "^3"
   },
   "dependencies": {
