@@ -1,11 +1,11 @@
 import totalMemory from "./totalMemory"
 import freeMemory from "./freeMemory"
 import usedMemory from "./usedMemory"
+import {FREQUENT} from "~/application/library"
+import {MODERATE} from "~/application/library"
+import {LAZY} from "~/application/library"
 
-const SECOND = 1000
-const FREQUENT = 1
-const LAZY = 15
 
-setInterval(totalMemory, LAZY * SECOND)
-setInterval(freeMemory, FREQUENT * SECOND)
-setInterval(usedMemory, FREQUENT * SECOND)
+setInterval(totalMemory, LAZY)
+setInterval(freeMemory, FREQUENT)
+setInterval(usedMemory, FREQUENT)
