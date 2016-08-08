@@ -3,6 +3,7 @@ import requireEnvironmentVariables from "require-environment-variables"
 import express from "express"
 import cors from "cors"
 import {join} from "path"
+import {map} from "ramda"
 import {store} from "~/application/remote"
 
 Dotenv.load({silent: true})
@@ -17,15 +18,15 @@ const application = express()
 application.use(cors())
 
 application.get("/types", (request, response) => {
-  return store
-    .hgetall("types")
+  return store.smembers("types")
     .then((data) => response.json(data))
     .catch((error) => console.error(error))
 })
 
 application.get("/types/:slug", ({params}, response) => {
-  return store
-    .hgetall(params.slug)
+  return store.keys(`${params.slug}/*`)
+    .then(map((key) => store.get(key)))
+    .then((promises) => Promise.all(promises))
     .then((data) => response.json(data))
     .catch((error) => console.error(error))
 })
