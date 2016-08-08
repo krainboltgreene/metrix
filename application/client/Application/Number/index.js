@@ -15,7 +15,6 @@ import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
 import BoxSubtitle from "../BoxSubtitle"
 import BoxValue from "../BoxValue"
-import BoxTime from "../BoxTime"
 import Loading from "../Loading"
 
 const connectToTimeseries = connect(
@@ -59,7 +58,6 @@ export default connectToTimeseries(class Number extends Component {
     const {subtitle} = this.props
     const {format} = this.props
     const {size} = this.props
-    const {timestamp} = this.props
     const {timeseries} = this.props
     const {value} = this.props
 
@@ -67,7 +65,6 @@ export default connectToTimeseries(class Number extends Component {
       <BoxHeader>{title}</BoxHeader>
       {this.maybeRender([subtitle], null, () => <BoxSubtitle>{subtitle}</BoxSubtitle>)}
       {this.maybeRender([value, format], <Loading />, () => <BoxValue size={size}>{format(value)}</BoxValue>)}
-      <BoxTime timestamp={new Date(timestamp)} />
       {
         this.maybeRender(
           [timeseries],
