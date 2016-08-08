@@ -8,7 +8,7 @@ export default function UsedMemory () {
   return <Number
     title="Used Memory"
     storeType="usedMemory"
-    format={pipe(parseInt, prettySize)}
+    format={pipe((value) => parseInt(value, 10), prettySize)}
     size="large"
   />
 }

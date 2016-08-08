@@ -7,7 +7,7 @@ export default function FreeMemory () {
   return <Number
     title="Free Memory"
     storeType="freeMemory"
-    format={pipe(parseInt, prettySize)}
+    format={pipe((value) => parseInt(value, 10), prettySize)}
     size="large"
   />
 }
