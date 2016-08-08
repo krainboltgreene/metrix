@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from "react"
+import {Sparklines} from "react-sparklines"
+import {SparklinesLine} from "react-sparklines"
 import {connect} from "react-redux"
 import {pathOr} from "ramda"
 import {mergeAll} from "ramda"
@@ -8,6 +10,7 @@ import {none} from "ramda"
 import {zipObj} from "ramda"
 import {objOf} from "ramda"
 import {map} from "ramda"
+import {toNumber} from "~/application/library"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
 import BoxSubtitle from "../BoxSubtitle"
@@ -65,6 +68,17 @@ export default connectToTimeseries(class Number extends Component {
       {this.maybeRender([subtitle], null, () => <BoxSubtitle>{subtitle}</BoxSubtitle>)}
       {this.maybeRender([value, format], <Loading />, () => <BoxValue size={size}>{format(value)}</BoxValue>)}
       <BoxTime timestamp={new Date(timestamp)} />
+      {
+        this.maybeRender(
+          [timeseries],
+          <Loading />,
+          () => {
+            return <Sparklines
+              data={timeseries}
+            >
+              <SparklinesLine color="black" />
+            </Sparklines>
+          })}
     </BoxBody>
   }
 })
