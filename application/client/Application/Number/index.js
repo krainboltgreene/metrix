@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from "react"
 import {Sparklines} from "react-sparklines"
-import {SparklinesLine} from "react-sparklines"
+import {SparklinesCurve} from "react-sparklines"
+import {SparklinesSpots} from "react-sparklines"
+import {SparklinesReferenceLine} from "react-sparklines"
 import {connect} from "react-redux"
 import {pathOr} from "ramda"
 import {path} from "ramda"
@@ -71,7 +73,12 @@ export default connectToTimeseries(class Number extends Component {
             return <Sparklines
               data={timeseries}
             >
-              <SparklinesLine color="black" />
+              <SparklinesCurve style={{fill: "none"}} color="white" />
+              <SparklinesSpots />
+              <SparklinesReferenceLine
+                type="avg"
+                style={{stroke: "white", strokeOpacity: 0.75, strokeDasharray: "2, 2"}}
+              />
             </Sparklines>
           })}
     </BoxBody>
