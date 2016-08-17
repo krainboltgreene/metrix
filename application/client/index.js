@@ -8,7 +8,7 @@ import store from "./store"
 
 window.store = store
 
-const HEARTBEAT = 500
+const HEARTBEAT = 1000
 
 const fetchType = (type) => {
   store.dispatch({type: "FETCHING_TYPE", payload: {type}})

@@ -1,11 +1,14 @@
 import {totalmem} from "os"
 import {write} from "~/application/library"
-import {LAZY} from "~/application/library"
+import {WEEK} from "~/application/library"
+
+const type = "totalMemory"
+const interval = WEEK
+const expire = WEEK * 2
 
 export default function totalMemory () {
-  const updatedAt = new Date().toJSON()
-  const type = "totalMemory"
-  const key = `${type}/${updatedAt}`
-
-  return write({type, key, value: totalmem(), expire: LAZY})
+  return [
+    () => write({type, value: totalmem(), expire}),
+    interval
+  ]
 }
