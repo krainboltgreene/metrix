@@ -1,20 +1,20 @@
 import React, {Component, PropTypes} from "react"
 import {Sparklines} from "react-sparklines"
-import {SparklinesCurve} from "react-sparklines"
+import {SparklinesLine} from "react-sparklines"
 import {SparklinesSpots} from "react-sparklines"
 import {SparklinesReferenceLine} from "react-sparklines"
 import {connect} from "react-redux"
 import {pathOr} from "ramda"
 import {path} from "ramda"
 import {mergeAll} from "ramda"
-import {isNil} from "ramda"
 import {equals} from "ramda"
-import {none} from "ramda"
+import {isEmpty} from "ramda"
+import {isNil} from "ramda"
 import {objOf} from "ramda"
 import {map} from "ramda"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
-import BoxSubtitle from "../BoxSubtitle"
+import BoxContent from "../BoxContent"
 import BoxValue from "../BoxValue"
 import Loading from "../Loading"
 
@@ -45,14 +45,6 @@ export default connectToTimeseries(class Number extends Component {
     return !equals(this.props.value, props.value)
   }
 
-  maybeRender (properties, alternative, components) {
-    if (none(isNil, properties)) {
-      return components()
-    }
-
-    return alternative
-  }
-
   render () {
     const {title} = this.props
     const {subtitle} = this.props
@@ -62,25 +54,34 @@ export default connectToTimeseries(class Number extends Component {
     const {value} = this.props
 
     return <BoxBody>
-      <BoxHeader>{title}</BoxHeader>
-      {this.maybeRender([subtitle], null, () => <BoxSubtitle>{subtitle}</BoxSubtitle>)}
-      {this.maybeRender([value, format], <Loading />, () => <BoxValue size={size}>{format(value)}</BoxValue>)}
+      <BoxHeader>
+        {title}
+        {
+          isNil(subtitle)
+          ? null
+          : <p><small>{subtitle}</small></p>
+        }
+      </BoxHeader>
       {
-        this.maybeRender(
-          [timeseries],
-          <Loading />,
-          () => {
-            return <Sparklines
-              data={timeseries}
-            >
-              <SparklinesCurve style={{fill: "none"}} color="white" />
-              <SparklinesSpots />
-              <SparklinesReferenceLine
-                type="avg"
-                style={{stroke: "white", strokeOpacity: 0.75, strokeDasharray: "2, 2"}}
-              />
-            </Sparklines>
-          })}
+        isNil(value) || isEmpty(timeseries)
+        ? <Loading />
+        : <BoxContent>
+          <BoxValue size={size}>{format(value)}</BoxValue>
+          <Sparklines
+            data={timeseries}
+          >
+            <SparklinesLine
+              style={{fill: "none"}}
+              color="white"
+            />
+            <SparklinesSpots />
+            <SparklinesReferenceLine
+              type="avg"
+              style={{stroke: "white", strokeOpacity: 0.75, strokeDasharray: "2, 2"}}
+            />
+          </Sparklines>
+        </BoxContent>
+      }
     </BoxBody>
   }
 })
