@@ -4,6 +4,8 @@ import express from "express"
 import cors from "cors"
 import {join} from "path"
 import {map} from "ramda"
+import {sortBy} from "ramda"
+import {identity} from "ramda"
 import {store} from "~/application/remote"
 
 Dotenv.load({silent: true})
@@ -25,6 +27,7 @@ application.get("/types", (request, response) => {
 
 application.get("/types/:slug", ({params}, response) => {
   return store.keys(`${params.slug}/*`)
+    .then(sortBy(identity))
     .then(map((key) => store.get(key)))
     .then((promises) => Promise.all(promises))
     .then((data) => response.json(data))
