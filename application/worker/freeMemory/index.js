@@ -1,11 +1,15 @@
 import {freemem} from "os"
 import {write} from "~/application/library"
-import {LAZY} from "~/application/library"
+import {SECOND} from "~/application/library"
+import {MINUTE} from "~/application/library"
+
+const type = "freeMemory"
+const interval = SECOND / 2
+const expire = MINUTE
 
 export default function freeMemory () {
-  const updatedAt = new Date().toJSON()
-  const type = "freeMemory"
-  const key = `${type}/${updatedAt}`
-
-  return write({type, key, value: freemem(), expire: LAZY})
+  return [
+    () => write({type, value: freemem(), expire}),
+    interval
+  ]
 }
