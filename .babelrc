@@ -1,14 +1,11 @@
 {
-  "presets" : [
+  "presets": [
     "react",
-    "es2015"
+    "latest"
   ],
   "plugins": [
     "transform-object-rest-spread",
     "transform-class-properties",
-    "closure-elimination",
-    "ramda",
-    "import-asserts",
     "relative-import"
   ]
 }

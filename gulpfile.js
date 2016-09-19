@@ -1,16 +1,32 @@
 const gulp = require("gulp")
 const gulpConcat = require("gulp-concat")
+const gulpMustache = require("gulp-mustache")
+const join = require("path").join
+const mergeAll = require("ramda").mergeAll
+const Dotenv = require("dotenv")
+const requireEnvironmentVariables = require("require-environment-variables")
+
+Dotenv.load({silent: true})
+
+requireEnvironmentVariables([
+  "PUSHER_PUBLIC"
+])
 
 const STYLES = [
   "./node_modules/normalize.css/normalize.css",
   "./node_modules/animate.css/animate.css",
-  "./application/client/index.css"
+  "./node_modules/font-awesome/css/font-awesome.css",
+  "./node_modules/bulma/css/bulma.css",
+  "./source/client/index.css"
 ]
 const HTMLS = [
-  "./application/client/index.html"
+  "./source/client/index.html"
+]
+const FONTS = [
+  "./node_modules/font-awesome/fonts/*"
 ]
 const STYLE = "index.css"
-const DESINATION = "./tmp/"
+const DESINATION = "./transpiled/client/"
 
 gulp.task("styles", () => {
   return gulp.src(STYLES)
@@ -18,13 +34,22 @@ gulp.task("styles", () => {
     .pipe(gulp.dest(DESINATION))
 })
 
+gulp.task("fonts", () => {
+  return gulp.src(FONTS)
+    .pipe(gulp.dest(join(DESINATION, "fonts")))
+})
+
 gulp.task("htmls", () => {
   return gulp.src(HTMLS)
+    .pipe(
+      gulpMustache(mergeAll([process.env]))
+    )
     .pipe(gulp.dest(DESINATION))
 })
 
-gulp.task("watch", ["styles", "htmls"], () => {
+gulp.task("watch", ["styles", "htmls", "fonts"], () => {
   gulp.watch(STYLES, ["styles"])
   gulp.watch(HTMLS, ["htmls"])
+  gulp.watch(FONTS, ["fonts"])
 })
-gulp.task("build", ["styles", "htmls"])
+gulp.task("build", ["styles", "htmls", "fonts"])

@@ -305,14 +305,14 @@ module.exports = {
     "react/no-did-update-set-state": "error",
     "react/no-direct-mutation-state": "error",
     "react/no-is-mounted": "error",
-    "react/no-multi-comp": "error",
+    "react/no-multi-comp": "warn",
     "react/no-render-return-value": "error",
     // Only useful for pure read only components
     // "react/no-set-state": "error",
     "react/no-string-refs": "error",
     "react/no-unknown-property": "error",
     "react/prefer-es6-class": "error",
-    "react/prefer-stateless-function": "error",
+    "react/prefer-stateless-function": "warn",
     "react/prop-types": "error",
     "react/react-in-jsx-scope": "error",
     // Freaks out with stateless components
