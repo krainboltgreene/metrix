@@ -102,6 +102,7 @@
     "react-addons-shallow-compare": "^15",
     "react-dom": "^15",
     "react-redux": "^4",
+    "react-sparklines": "^1",
     "redis": "^2",
     "redis-commands": "^1",
     "redux": "^3",
