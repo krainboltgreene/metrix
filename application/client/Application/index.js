@@ -1,10 +1,28 @@
-import React from "react"
-import SystemLayout from "./SystemLayout"
-import DevTool from "./DevTool"
+import React, {PropTypes} from "react"
+import {connect} from "react-redux"
 
-export default function Application () {
+import LayoutSystem from "./LayoutSystem"
+import Focus from "./Focus"
+// import DevTool from "./DevTool"
+
+const connectToFocus = connect(
+  (state, props) => {
+    return {
+      ...props,
+      focus: state.focus
+    }
+  }
+)
+
+export default connectToFocus(function Application ({focus}) {
+  if (focus) {
+    return <section className="Application">
+      <Focus component={focus} />
+    </section>
+  }
+
   return <section>
-    <SystemLayout />
+    <LayoutSystem />
     {/*<DevTool />*/}
   </section>
-}
+})

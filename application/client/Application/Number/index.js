@@ -2,58 +2,66 @@ import React, {Component, PropTypes} from "react"
 import {Sparklines} from "react-sparklines"
 import {SparklinesLine} from "react-sparklines"
 import {SparklinesReferenceLine} from "react-sparklines"
+import shallowCompare from "react-addons-shallow-compare"
 import {connect} from "react-redux"
 import {pathOr} from "ramda"
-import {path} from "ramda"
-import {mergeAll} from "ramda"
-import {equals} from "ramda"
 import {isEmpty} from "ramda"
 import {isNil} from "ramda"
-import {objOf} from "ramda"
 import {map} from "ramda"
 import BoxBody from "../BoxBody"
 import BoxHeader from "../BoxHeader"
 import BoxContent from "../BoxContent"
 import BoxValue from "../BoxValue"
-import Loading from "../Loading"
 
+const asIntegerStream = map((data) => parseInt(data, 10))
 const connectToTimeseries = connect(
   (state, props) => {
-    return mergeAll(
-      [
-        props,
-        objOf("value", path(["streams", props.storeType, "latest"], state)),
-        objOf("timeseries", map((value) => parseInt(value, 10), pathOr([], ["streams", props.storeType, "timeseries"], state)))
-      ]
-    )
+    const value = parseInt(pathOr(0, ["streams", props.storeType, "latest"], state), 10)
+    const timeseries = pathOr([], ["streams", props.storeType, "timeseries"], state)
+
+    return {
+      ...props,
+      value,
+      timeseries
+    }
   }
 )
 
 export default connectToTimeseries(class Number extends Component {
   static propTypes = {
+    dispatch: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
     storeType: PropTypes.string.isRequired,
     format: PropTypes.func.isRequired,
     size: PropTypes.string,
     timeseries: PropTypes.instanceOf(Array),
-    value: PropTypes.string
+    value: PropTypes.number,
+    parent: PropTypes.func.isRequired
   }
 
-  shouldComponentUpdate (props) {
-    return !equals(this.props.value, props.value)
+  shouldComponentUpdate (nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState)
+  }
+
+  onClickBoxContent () {
+    return this.props.dispatch({type: "NAVIGATE", payload: {component: this.props.parent}})
   }
 
   render () {
+    const {dispatch} = this.props
     const {title} = this.props
     const {subtitle} = this.props
     const {format} = this.props
     const {size} = this.props
     const {timeseries} = this.props
     const {value} = this.props
+    const {parent} = this.props
 
     return <BoxBody>
-      <BoxHeader>
+      <BoxHeader
+        onClick={this.onClickBoxContent}
+      >
         {title}
         {
           isNil(subtitle)
@@ -61,25 +69,25 @@ export default connectToTimeseries(class Number extends Component {
           : <p><small>{subtitle}</small></p>
         }
       </BoxHeader>
-      {
-        isNil(value) || isEmpty(timeseries)
-        ? <Loading />
-        : <BoxContent>
-          <BoxValue size={size}>{format(value)}</BoxValue>
-          <Sparklines
-            data={timeseries}
-          >
-            <SparklinesLine
-              style={{fill: "none"}}
-              color="white"
-            />
-            <SparklinesReferenceLine
-              type="avg"
-              style={{stroke: "white", strokeOpacity: 0.75, strokeDasharray: "2, 2"}}
-            />
-          </Sparklines>
-        </BoxContent>
-      }
+      <BoxContent
+        condition={isNil(value) || isEmpty(timeseries)}
+        parent={parent}
+        dispatch={dispatch}
+      >
+        <BoxValue size={size}>{format(value)}</BoxValue>
+        <Sparklines
+          data={asIntegerStream(timeseries)}
+        >
+          <SparklinesLine
+            style={{fill: "none"}}
+            color="white"
+          />
+          <SparklinesReferenceLine
+            type="avg"
+            style={{stroke: "white", strokeOpacity: 0.75, strokeDasharray: "2, 2"}}
+          />
+        </Sparklines>
+      </BoxContent>
     </BoxBody>
   }
 })

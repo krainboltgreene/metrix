@@ -1,6 +1,12 @@
 import React, {PropTypes} from "react"
+import Loading from "../Loading"
 
-export default function BoxContent ({children}) {
+export default function BoxContent ({children, condition}) {
+  if (condition) {
+    return <section className="BoxContent">
+      <Loading />
+    </section>
+  }
 
   return <section
     className="BoxContent"
@@ -10,5 +16,6 @@ export default function BoxContent ({children}) {
   </section>
 }
 BoxContent.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  condition: PropTypes.bool.isRequired
 }

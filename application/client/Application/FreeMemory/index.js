@@ -5,6 +5,7 @@ import Number from "../Number"
 
 export default function FreeMemory () {
   return <Number
+    parent={FreeMemory}
     title="Free Memory"
     storeType="freeMemory"
     format={pipe((value) => parseInt(value, 10), prettySize)}
