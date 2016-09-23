@@ -4,7 +4,7 @@
   "description": "The lifeblood of your product: Metadata of the data.",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all build --parallel watch",
+    "start": "npm-run-all build --parallel watch:build service",
     "postinstall": "npm run build",
     "build": "npm-run-all build:transpiled --parallel build:server build:worker build:assets build:client",
     "build:transpiled": "rm -rf './transpiled/' && mkdir -p './transpiled/client/' './transpiled/server'",
