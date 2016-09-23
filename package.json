@@ -77,10 +77,10 @@
     "uglifyify": "^3.0.3",
     "watchify": "^3"
   },
-  "peerDependencies": {
+  "optionalDependencies": {
     "request": "^2",
     "request-promise": "^4",
-    "knex": "0.11.9",
+    "knex": "0.12.1",
     "pg": "^4"
   },
   "dependencies": {
