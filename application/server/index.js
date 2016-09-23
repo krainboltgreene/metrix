@@ -42,8 +42,8 @@ application.get("/types/:slug", ({params}, response) => {
     .catch((error) => console.error(error))
 })
 
-application.use(express.static("tmp"))
-application.use("/", express.static(join("tmp", "index.html")))
+application.use(express.static(join(__dirname, "..", "client")))
+application.use("/", express.static(join(__dirname, "..", "client", "index.html")))
 
 application.listen(process.env.PORT, () => {
   return console.log(`Listening to ${process.env.PORT}`)
