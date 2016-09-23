@@ -84,7 +84,7 @@
     "pg": "^4"
   },
   "dependencies": {
-    "abstraction": "^7",
+    "abstraction": "^8",
     "bulma": "0.1.2",
     "bunyan": "^1",
     "cors": "^2",
