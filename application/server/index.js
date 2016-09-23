@@ -13,7 +13,7 @@ import {store} from "./remote"
 Dotenv.load({silent: true})
 
 requireEnvironmentVariables([
-  "API_PORT",
+  "PORT",
   "NODE_ENV"
 ])
 
@@ -45,6 +45,6 @@ application.get("/types/:slug", ({params}, response) => {
 application.use(express.static("tmp"))
 application.use("/", express.static(join("tmp", "index.html")))
 
-application.listen(process.env.API_PORT, () => {
-  return console.log(`Listening to ${process.env.API_PORT}`)
+application.listen(process.env.PORT, () => {
+  return console.log(`Listening to ${process.env.PORT}`)
 })
