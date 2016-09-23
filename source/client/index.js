@@ -6,8 +6,6 @@ import {tap} from "ramda"
 import Application from "./Application"
 import store from "./store"
 
-window.store = store
-
 const HEARTBEAT = 1000
 
 setInterval(
