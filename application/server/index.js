@@ -1,12 +1,14 @@
+import {join} from "path"
 import Dotenv from "dotenv"
 import requireEnvironmentVariables from "require-environment-variables"
 import express from "express"
 import cors from "cors"
-import {join} from "path"
+import morgan from "morgan"
 import {map} from "ramda"
 import {sortBy} from "ramda"
 import {identity} from "ramda"
-import {store} from "~/application/remote"
+
+import {store} from "./remote"
 
 Dotenv.load({silent: true})
 
@@ -28,8 +30,14 @@ application.get("/types", (request, response) => {
 application.get("/types/:slug", ({params}, response) => {
   return store.keys(`${params.slug}/*`)
     .then(sortBy(identity))
-    .then(map((key) => store.get(key)))
-    .then((promises) => Promise.all(promises))
+    .then((keys) => {
+      return Promise
+        .all([
+          store.ttl(keys[0]),
+          ...map((key) => store.get(key), keys)
+        ])
+        .then(([expiresAt, ...values]) => ({values, expiresAt}))
+    })
     .then((data) => response.json(data))
     .catch((error) => console.error(error))
 })
