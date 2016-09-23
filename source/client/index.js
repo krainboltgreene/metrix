@@ -12,13 +12,29 @@ setInterval(
   function fetchTypes () {
     store.dispatch({type: "FETCHING_TYPES"})
 
-    return fetch("http://localhost:8080/types")
+    return fetch(
+      "http://localhost:8080/types",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        }
+      }
+    )
       .then((response) => response.json())
       .then(tap((types) => store.dispatch({type: "TYPES_RECEIVED", payload: {types}})))
       .then(map(function fetchType (type) {
         store.dispatch({type: "FETCHING_TYPE", payload: {type}})
 
-        return fetch(`http://localhost:8080/types/${type}`)
+        return fetch(
+          `http://localhost:8080/types/${type}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            }
+          }
+        )
           .then((response) => response.json())
           .then((values) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
       }))
