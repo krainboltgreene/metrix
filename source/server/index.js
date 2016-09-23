@@ -4,6 +4,7 @@ import requireEnvironmentVariables from "require-environment-variables"
 import express from "express"
 import cors from "cors"
 import morgan from "morgan"
+import compression from "compression"
 import {map} from "ramda"
 import {sortBy} from "ramda"
 import {identity} from "ramda"
@@ -21,6 +22,7 @@ const application = express()
 
 application.use(cors())
 application.use(morgan("combined"))
+application.use(compression())
 
 application.get("/types", (request, response) => {
   return store.smembers("types")
