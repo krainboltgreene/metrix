@@ -1,7 +1,11 @@
 import React, {PropTypes} from "react"
 
 export default function BoxContent ({children}) {
-  return <section className="BoxContent">
+
+  return <section
+    className="BoxContent"
+    style={{width: "100%"}}
+  >
     {children}
   </section>
 }
