@@ -86,7 +86,7 @@
   "dependencies": {
     "pusher-js": "^3",
     "abstraction": "^7",
-    "bulma": "^0.1.2",
+    "bulma": "0.1.2",
     "bunyan": "^1",
     "cors": "^2",
     "dotenv": "^2",
