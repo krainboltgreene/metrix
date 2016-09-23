@@ -20,6 +20,7 @@ requireEnvironmentVariables([
 const application = express()
 
 application.use(cors())
+application.use(morgan("combined"))
 
 application.get("/types", (request, response) => {
   return store.smembers("types")
