@@ -22,7 +22,7 @@ const HEARTBEAT = 1000
 
         return fetch(`http://localhost:8080/types/${type}`)
           .then((response) => response.json())
-          .then(({values}) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
+          .then((values) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
       }))
   }
   fetchTypes ()

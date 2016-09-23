@@ -33,14 +33,8 @@ application.get("/types", (request, response) => {
 application.get("/types/:slug", ({params}, response) => {
   return store.keys(`${params.slug}/*`)
     .then(sortBy(identity))
-    .then((keys) => {
-      return Promise
-        .all([
-          store.ttl(keys[0]),
-          ...map((key) => store.get(key), keys)
-        ])
-        .then(([expiresAt, ...values]) => ({values, expiresAt}))
-    })
+    .then(map((key) => store.get(key)))
+    .then((lookups) => Promise.all(lookups))
     .then((data) => response.json(data))
     .catch((error) => console.error(error))
 })
