@@ -10,7 +10,7 @@ window.store = store
 
 const HEARTBEAT = 1000
 
-// setInterval(
+setInterval(
   function fetchTypes () {
     store.dispatch({type: "FETCHING_TYPES"})
 
