@@ -39,8 +39,7 @@ setInterval(
           .then((values) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
       }))
   }
-  fetchTypes ()
-// , HEARTBEAT)
+, HEARTBEAT)
 
 render(
   <Provider store={store}>
