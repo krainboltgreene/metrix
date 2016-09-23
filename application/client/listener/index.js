@@ -32,6 +32,7 @@ export default function listener (state = initialState, signal) {
       }
     }
     default: {
+      console.log({signal})
       return state
     }
   }
