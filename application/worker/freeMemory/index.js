@@ -1,7 +1,7 @@
 import {freemem} from "os"
-import {write} from "~/application/library"
-import {SECOND} from "~/application/library"
-import {MINUTE} from "~/application/library"
+import write from "../write"
+import {SECOND} from "../interval"
+import {MINUTE} from "../interval"
 
 const type = "freeMemory"
 const interval = SECOND / 2

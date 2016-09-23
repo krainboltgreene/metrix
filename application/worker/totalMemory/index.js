@@ -1,10 +1,10 @@
 import {totalmem} from "os"
-import {write} from "~/application/library"
-import {WEEK} from "~/application/library"
+import write from "../write"
+import {DAY} from "../interval"
 
 const type = "totalMemory"
-const interval = WEEK
-const expire = WEEK * 2
+const interval = DAY
+const expire = DAY * 2
 
 export default function totalMemory () {
   return [
