@@ -2,11 +2,18 @@ import {last} from "ramda"
 
 export const initialState = {
   streams: {},
-  loading: false
+  loading: false,
+  focus: false
 }
 
 export default function listener (state = initialState, signal) {
   switch (signal.type) {
+    case "NAVIGATE": {
+      return {
+        ...state,
+        focusing: signal.payload.slug
+      }
+    }
     case "FETCHING_TYPE": {
       return {
         ...state,
