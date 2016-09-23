@@ -8,10 +8,6 @@ const requireEnvironmentVariables = require("require-environment-variables")
 
 Dotenv.load({silent: true})
 
-requireEnvironmentVariables([
-  "PUSHER_PUBLIC"
-])
-
 const STYLES = [
   "./node_modules/normalize.css/normalize.css",
   "./node_modules/animate.css/animate.css",
