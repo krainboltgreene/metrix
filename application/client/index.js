@@ -10,24 +10,23 @@ window.store = store
 
 const HEARTBEAT = 1000
 
-const fetchType = (type) => {
-  store.dispatch({type: "FETCHING_TYPE", payload: {type}})
+// setInterval(
+  function fetchTypes () {
+    store.dispatch({type: "FETCHING_TYPES"})
 
-  return fetch(`http://localhost:8081/types/${type}`)
-    .then((response) => response.json())
-    .then((values) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
-}
+    return fetch("http://localhost:8080/types")
+      .then((response) => response.json())
+      .then(tap((types) => store.dispatch({type: "TYPES_RECEIVED", payload: {types}})))
+      .then(map(function fetchType (type) {
+        store.dispatch({type: "FETCHING_TYPE", payload: {type}})
 
-const fetchTypes = () => {
-  store.dispatch({type: "FETCHING_TYPES"})
-
-  return fetch("http://localhost:8081/types")
-    .then((response) => response.json())
-    .then(tap((types) => store.dispatch({type: "TYPES_RECEIVED", payload: {types}})))
-    .then(map(fetchType))
-}
-
-setInterval(fetchTypes, HEARTBEAT)
+        return fetch(`http://localhost:8080/types/${type}`)
+          .then((response) => response.json())
+          .then(({values}) => store.dispatch({type: "VALUES_RECEIVED", payload: {values, type}}))
+      }))
+  }
+  fetchTypes ()
+// , HEARTBEAT)
 
 render(
   <Provider store={store}>
