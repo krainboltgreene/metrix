@@ -84,7 +84,6 @@
     "pg": "^4"
   },
   "dependencies": {
-    "pusher-js": "^3",
     "abstraction": "^7",
     "bulma": "0.1.2",
     "bunyan": "^1",
@@ -95,7 +94,6 @@
     "httpstatuses": "^3",
     "normalize.css": "^4",
     "npm-run-all": "^3",
-    "pusher": "^1",
     "ramda": "0.22.1",
     "ramda-extra": "^1",
     "raw-body": "^2",
