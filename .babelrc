@@ -1,0 +1,11 @@
+{
+  "presets": [
+    "react",
+    "latest"
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    "relative-import"
+  ]
+}
